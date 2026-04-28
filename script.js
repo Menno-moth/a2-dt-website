@@ -16,3 +16,14 @@ function logoutUser() {
         window.location.href = "index.php";
     }, 1000);
 }
+
+document.addEventListener("DOMContentLoaded", function () {
+    const textarea = document.querySelector("textarea");
+
+    if (!textarea) return;
+
+    textarea.addEventListener("input", function () {
+        this.style.height = "auto";
+        this.style.height = this.scrollHeight + "px";
+    });
+});
