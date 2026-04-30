@@ -1,12 +1,9 @@
 
-
-<?php
-
 $sDbServer = "localhost";
 $sDbUser = "root";
 $sDbPassword = "";
 $sDbDatabase = "commissions";
-
+$conn = null;
 try {
     $oDbConn = mysqli_connect($sDbServer, $sDbUser, $sDbPassword, $sDbDatabase);
     $conn = $oDbConn;

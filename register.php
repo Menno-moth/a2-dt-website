@@ -101,14 +101,9 @@ include 'navbar.php';
 </html>
 
 <?php 
-ini_set('display_errors', 1);
-ini_set('display_startup_errors', 1);
-error_reporting(E_ALL);
-$conn = mysqli_connect("localhost", "root", "", "commissions");
 
-if ($conn === false) {
-    die(json_encode(["error" => "Could not connect: " . mysqli_connect_error()]));
-}
+
+// Acquiring data from form with filtering and sanitization.
 if (isset($_POST["sSubmitButton"])){
                 $firstName = filter_input(INPUT_POST, "sFirstName", FILTER_SANITIZE_SPECIAL_CHARS);
                 $lastName = filter_input(INPUT_POST, "sLastName", FILTER_SANITIZE_SPECIAL_CHARS);
@@ -116,7 +111,6 @@ if (isset($_POST["sSubmitButton"])){
                 $email = filter_input(INPUT_POST, "sEmail", FILTER_SANITIZE_EMAIL);               
                 $password = filter_input(INPUT_POST, "sPassword", FILTER_SANITIZE_SPECIAL_CHARS);
                 $Role = isset($_POST["StaffCheckbox"]) ? 1 : 0;
-
                 
                 echo "button pressed From Register php <br>";
                 echo $password."<br>";
@@ -125,14 +119,29 @@ if (isset($_POST["sSubmitButton"])){
                 echo $lastName. "<br>"; 
                 echo $dateOfBirth. "<br>";
                 echo $email. "<br>";
+
+
+
 // Hash password
 $hashedPassword = password_hash($password, PASSWORD_DEFAULT);
-  
 echo "Hashed Password: " . $hashedPassword . "<br>";
 
 // Prepare SQL statement to prevent SQL injection
 $sql = "INSERT INTO users (FirstName, LastName, DateOfBirth, Email, Password, Role) 
         VALUES (?, ?, ?, ?, ?, ?)";
+$sDataTypes = "sssssi"; // s for string, i for integer   
+
+ini_set('display_errors', 1);
+ini_set('display_startup_errors', 1);
+error_reporting(E_ALL);
+$conn = mysqli_connect("localhost", "root", "", "commissions");
+
+if ($conn === false) {
+    die(json_encode(["error" => "Could not connect: " . mysqli_connect_error()]));
+}
+
+
+
 
 $stmt = $conn->prepare($sql);
 
@@ -142,8 +151,11 @@ if ($stmt === false) {
     exit;
 }
 
+// Check if we can use array to pass day to bind_param;
+ $data = array($sDataTypes, $firstName, $lastName, $dateOfBirth, $email, $hashedPassword, $Role);
+
 // Bind parameters
-$stmt->bind_param("sssssi", $firstName, $lastName, $dateOfBirth, $email, $hashedPassword, $Role);
+$stmt->bind_param( ...$data);
 
 // Execute statement
 if ($stmt->execute()) {
