@@ -84,239 +84,101 @@ include 'navbar.php';
                         <input type="checkbox" name="StaffCheckbox" id="staffID">
                     </p>
 
-                    <!-- <p class="FNp">
-                        <label for="FirstName">First Name:</label>
-                        <small>*</small>
-                        <input type="text" name="sFirstName" id="sFirstNameID" tabindex="1"
-                            size="10" maxlength="10" required pattern="[A-Za-z]+"
-                            title="First name should only contain letters." autofocus
-                            oninvalid="this.setCustomValidity('Please enter a valid first name.')"
-                            oninput="this.setCustomValidity('')">
-                    </p>
-
-                    <p>
-                        <label for="LastName">Last Name:</label>
-                        <small>*</small>
-                        <input type="text" name="sLastName" id="sLastNameID" tabindex="2"
-                            size="10" maxlength="10" required pattern="[A-Za-z]+"
-                            title="Last name should only contain letters."
-                            oninvalid="this.setCustomValidity('Please enter a valid last name.')"
-                            oninput="this.setCustomValidity('')">
-                    </p>
-
-                    <p>
-                        <label for="DateOfBirth">Date Of Birth:</label>
-                        <input type="date" name="sDateOfBirth" id="sDateOfBirthID" tabindex="3"
-                            required pattern="\d{2}-\d{2}-\d{4}" title="Date of Birth should be in the format DD-MM-YYYY.">
-                    </p>
-                    <p class="FNp">
-                        <label> Email: </label>
-                        <input type="email" name="sEmail" id="sEmailID" tabindex="4"
-                            required pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$"
-                            title="Please enter a valid email address.">
-                    </p>
-
-                    <p>
-                        <label> Password:</label>
-                        <input type="password" name="sPassword" id="sPasswordID" tabindex="5" required
-                            pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$"
-                            minlength="8" data-toggle="password"
-                            title="Password must be at least 8 characters long and include an uppercase letter, a lowercase letter, a number, and a special character.">
-                    </p>
-
-                    <p>
-                        <label for="PasswordVerification">Retype Password:</label>
-                        <input type="password" name="sPasswordVerification" id="sPasswordVerificationID" tabindex="6" required
-                            pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$"
-                            minlength="8" data-toggle="password">
-                    </p>
-
-                    <p id="staffCheckboxDisplay">
-                        <label for="StaffCheckbox">Staff Member:</label>
-                        <input type="checkbox" name="StaffCheckbox" id="staffID">
-                    </p> -->
+               
 
 
                     <input type="submit" name="sSubmitButton" id="sSubmitBUttonID" value="Register">
                 </form>
-                <script>
-                    function togglePassword() {
-                        let pw = document.getElementById("password");
-                        pw.type = (pw.type === "password") ? "text" : "password";
-                    }
-                </script>
+                
             </div>
         </section>
 
     </div>
-    <?php
-    echo "testing";
-    ?>
-    if (isset($_POST["sSubmitButton"])) {
-
-    <!-- Login Overlay -->
-    <div id="loginOverlay"></div>
-
-    <!-- Popup Overlay -->
-    <div id="popupOverlay"></div>
-
-    <!-- Popup  -->
-    <div id="idlePopup" style="z-index: 120">
-        <h2>Sign Out</h2>
-        <p>Do you want to sign out?</p>
-        <button onclick="signOut()">Yes</button>
-        <button id="declineSignOut" onclick="signOutReject()">No</button>
-    </div>
-
-    <div></div>
-    <footer class="footer" style="left: 0">
-        <div class="copyright">&copy;2025 - <strong>Miners Hollow</strong></div>
-    </footer>
-    </div>
-
-    <script src="js/jquery-3.4.1.min.js"></script>
-    <script src="js/popper.min.js"></script>
-    <script src="js/bootstrap-4.4.1.js"></script>
-    <script src="js/defaultJS.js"></script>
-
-    <script>
-        $(document).ready(function() {
-            // Retrieving local storage data
-            var customerID = sessionStorage.getItem('customerID');
-            var isStaffMember = sessionStorage.getItem('isStaffMember');
-            isStaffMember = parseInt(isStaffMember);
-
-            // Checking if customer is logged in
-            if (customerID && customerID.trim() !== "") {
-                document.getElementById('popupOverlay').style.display = 'inline';
-                document.getElementById('idlePopup').style.display = 'inline';
-                document.getElementById('loginOverlay').style.display = 'none';
-
-                // Checking if they are not staff
-                if (isStaffMember !== 1) {
-                    document.getElementById('declineSignOut').onclick = signOutReject;
-                } else {
-                    document.getElementById('declineSignOut').onclick = signOutRejectStaff;
-                }
-            } else {
-                document.getElementById('popupOverlay').style.display = 'none';
-                document.getElementById('idlePopup').style.display = 'none';
-                document.getElementById('loginOverlay').style.display = 'none';
-            }
-        })
-
-        function signOut() {
-            // Resetting local storage
-            sessionStorage.removeItem('customerID');
-            sessionStorage.setItem('isStaffMember', 'false');
-            sessionStorage.setItem('offerTaught', 0);
-
-            // Redirecting back to homepage
-            window.location.href = "MHHomepage.html";
-        }
-
-        function signOutReject() {
-            // Redirecting back to homepage
-            window.location.href = "MHHomepage.html";
-        }
-
-        function signOutRejectStaff() {
-            // Closing pop up
-            document.getElementById('popupOverlay').style.display = 'none';
-            document.getElementById('idlePopup').style.display = 'none';
-            document.getElementById('loginOverlay').style.display = 'inline';
-        }
-    </script>
-
-    <script>
-        $(document).ready(function() {
-            // Handle Signup Form
-            $("#signupForm").submit(function(e) {
-                e.preventDefault();
-
-                var formData = $(this).serialize();
-
-                // Send AJAX request to signup.php
-                $.ajax({
-                    url: 'RegistrationValidation.php',
-                    method: 'POST',
-                    data: formData,
-                    dataType: 'json', // Expecting JSON response
-                    success: function(response) {
-                        if (response.errors) {
-                            let errorMessage = ""
-                            response.errors.forEach(function(error) {
-                                errorMessage += error + '\n';
-                            });
-                            alert(errorMessage);
-                            return;
-                        }
-                        if (response.error) {
-                            // Show alert for error
-                            alert(response.error);
-                            return;
-                        }
-                        alert("Successfully Registered!")
-                        sessionStorage.setItem('customerID', response.CustomerID);
-                        sessionStorage.setItem('isStaffMember', response.AccessLevel);
-                        window.location.href = "../MHHomepage.html"; // Redirect to a page after successful signup
-                    },
-                    error: function(xhr, status, error) {
-                        alert("An error occurred: " + error);
-                    }
-                });
-            });
-
-            // Handle Login Form
-            $("#loginForm").submit(function(e) {
-                e.preventDefault(); // Prevent default form submission
-
-                var email = $("input[name='loginEmail']").val();
-                var password = $("input[name='loginPassword']").val();
-
-                // Send AJAX request to login.php
-                $.ajax({
-                    url: 'php/login.php',
-                    method: 'POST',
-                    data: {
-                        Email: email,
-                        Password: password
-                    },
-                    success: function(response) {
-                        // Parse the response to handle as JSON
-                        var response = JSON.parse(response);
-
-                        if (response.error) {
-                            alert(response.error);
-                            return;
-                        }
-
-                        sessionStorage.setItem('customerID', response.CustomerID);
-                        sessionStorage.setItem('isStaffMember', response.AccessLevel);
-                        alert("Login successful!");
-                        window.location.href = "../MHProductPage.html"; // Redirect to a page after successful login
-                    },
-                    error: function(xhr, status, error) {
-                        alert("Error: " + error);
-                    }
-                });
-            });
-        });
-    </script>
-
-    <script>
-        const staffCheckbox = document.getElementById("staffCheckboxDisplay");
-
-        if (sessionStorage.getItem('isStaffMember') == 1) {
-            staffCheckbox.style.display = 'inline';
-        } else {
-            staffCheckbox.style.display = 'none';
-        }
-    </script>
-
-
-
+ 
 
 </body>
 
 </html>
+
+<?php 
+ini_set('display_errors', 1);
+ini_set('display_startup_errors', 1);
+error_reporting(E_ALL);
+$conn = mysqli_connect("localhost", "root", "", "commissions");
+
+if ($conn === false) {
+    die(json_encode(["error" => "Could not connect: " . mysqli_connect_error()]));
+}
+if (isset($_POST["sSubmitButton"])){
+                $firstName = filter_input(INPUT_POST, "sFirstName", FILTER_SANITIZE_SPECIAL_CHARS);
+                $lastName = filter_input(INPUT_POST, "sLastName", FILTER_SANITIZE_SPECIAL_CHARS);
+                $dateOfBirth = filter_input(INPUT_POST, "sDateOfBirth", FILTER_SANITIZE_SPECIAL_CHARS);
+                $email = filter_input(INPUT_POST, "sEmail", FILTER_SANITIZE_EMAIL);               
+                $password = filter_input(INPUT_POST, "sPassword", FILTER_SANITIZE_SPECIAL_CHARS);
+                $Role = isset($_POST["StaffCheckbox"]) ? 1 : 0;
+
+                
+                echo "button pressed From Register php <br>";
+                echo $password."<br>";
+                echo $email. "<br>";
+                echo $firstName. "<br>";
+                echo $lastName. "<br>"; 
+                echo $dateOfBirth. "<br>";
+                echo $email. "<br>";
+// Hash password
+$hashedPassword = password_hash($password, PASSWORD_DEFAULT);
+  
+echo "Hashed Password: " . $hashedPassword . "<br>";
+
+// Prepare SQL statement to prevent SQL injection
+$sql = "INSERT INTO users (FirstName, LastName, DateOfBirth, Email, Password, Role) 
+        VALUES (?, ?, ?, ?, ?, ?)";
+
+$stmt = $conn->prepare($sql);
+
+// Check if prepare failed
+if ($stmt === false) {
+    echo json_encode(["error" => "SQL Error: " . $conn->error]);
+    exit;
+}
+
+// Bind parameters
+$stmt->bind_param("sssssi", $firstName, $lastName, $dateOfBirth, $email, $hashedPassword, $Role);
+
+// Execute statement
+if ($stmt->execute()) {
+	// Creating user object
+	$user = [
+        "FirstName" => $firstName,
+        "LastName" => $lastName,
+        "DateOfBirth" => $dateOfBirth,
+        "Email" => $email,
+        "Role" => $Role,
+        "CustomerID" => $stmt->insert_id,
+    ];
+	
+    // Redirect to login page
+    echo json_encode($user);
+} else {
+    echo json_encode(["error" => "ERROR: Could not execute query. " . $stmt->error]);
+}
+
+mysqli_close($conn);
+
+// $conn = new mysqli("localhost", "root", "", "commissions");
+// $sql = "INSERT INTO users (FirstName, LastName, DateOfBirth, Email, Password, Role) 
+//         VALUES ($firstName, $lastName, $dateOfBirth, $email, $hashedPassword, 0)";
+// mysqli_query($conn, $sql);
+// mysqli_close($conn);
+$sDbServer = "localhost";
+$sDbDatabase = "commissions";
+$sDbUser = "root";
+$sDbPassword = "root";
+//include 'db.php';
+}
+?>
+
+
+
+
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                
