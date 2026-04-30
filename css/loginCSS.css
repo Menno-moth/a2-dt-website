@@ -1,0 +1,95 @@
+@charset "utf-8";
+/* CSS Document */
+
+.mainLoginArea {
+	height: 87vh;
+	background-color: #E9C8FF;
+	width: 50%;
+	float: left;
+	border-right: 1px solid black;
+	box-sizing: border-box;
+	padding-top: 20px;
+	display: flex;
+	flex-direction: column;
+	flex-wrap: nowrap;
+	align-items: stretch;
+	gap: 0px;
+}
+
+.mainSignupArea {
+	height: 87vh;
+	background-color: #E9C8FF;
+	width: 50%;
+	float: right;
+	border-left: 1px solid black;
+	box-sizing: border-box;
+	padding-top: 20px;
+}
+
+.centerAlign {
+	text-align: center;
+}
+
+.FNp {
+	margin-top: 0px;
+	padding-top: 10px;
+}
+
+/* Basic style for the popup */
+#idlePopup {
+	display: none;
+	position: fixed;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	background-color: #fff;
+	padding: 20px;
+	border: 2px solid #ccc;
+	box-shadow: 10px 10px 5px rgba(0, 0, 0, 0.8);
+	z-index: 1000;
+	text-align: center;
+	border-radius: 10px;
+}
+
+#idlePopup h2 {
+	margin: 0;
+	font-size: 1.5em;
+}
+
+#idlePopup p {
+	margin: 10px 0;
+}
+
+#idlePopup button {
+	padding: 10px;
+	background-color: #9A18C9;
+	color: #FFFFFF;
+	border: none;
+	cursor: pointer;
+}
+
+#idlePopup button:hover {
+	background-color: #D597FF;
+}
+
+/* Overlay background to dim the page */
+#popupOverlay {
+	display: none;
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	background-color: rgba(0, 0, 0, 0.7);
+	z-index: 110;
+}
+#loginOverlay {
+	display: none;
+	position: fixed;
+	top: 13vh;
+	left: 0;
+	width: 50%;
+	height: 85.3vh;
+	background-color: rgba(0, 0, 0, 0.7);
+	z-index: 90;
+}

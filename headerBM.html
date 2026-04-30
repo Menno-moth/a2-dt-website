@@ -1,0 +1,53 @@
+<link rel="stylesheet" href="header.css">
+<link rel="stylesheet" href="headerBM.css">
+
+<header class="site-header">
+  <div class="primary_header">
+    <a href="MHHomepage.html">
+      <img class="logo" src="images/general/Miner/minerBase.png" id="minerBaseLogo" alt="Miner">
+    </a>
+
+    <div class="header-actions">
+      <a href="MHLogin.html">
+        <img class="logo" src="images/general/loginIcon.png" id="loginLogo" alt="Log In">
+      </a>
+
+      <a href="MHBasket.html" id="basketGameAlternateLink">
+        <img class="logo" id="basketGameAlternate" src="images/general/basketIcon.png" alt="Basket Logo">
+      </a>
+
+      <a href="MHCustomerViewer.html" id="customerViewerLink">
+        <img id="customerViewer" src="images/general/customerIcon.png" alt="Customer Icon">
+      </a>
+    </div>
+
+    <!-- BURGER MENU BUTTON -->
+    <button class="burger" id="burgerBtn" aria-label="Toggle Menu">
+      <span></span>
+      <span></span>
+      <span></span>
+    </button>
+  </div>
+
+  <nav class="secondary_header" id="menu">
+    <ul>
+      <li><a href="index.php" class="navLink">HOME</a></li>
+      <li><a href="portfolio.php" class="navLink">PORTFOLIO</a></li>
+      <li><a href="commissions.php" class="navLink">COMMISSIONS</a></li>
+      <li><a href="order.php" class="navLink">ORDERS</a></li>
+      <li><a href="about.php" class="navLink">ABOUT ME</a></li>
+    </ul>
+  </nav>
+
+  <div class="originalHeadingHolder"></div>
+</header>
+
+<script>
+  const burger = document.getElementById("burgerBtn");
+  const menu = document.getElementById("menu");
+
+  burger.addEventListener("click", () => {
+    menu.classList.toggle("open");
+    burger.classList.toggle("open");
+  });
+</script>

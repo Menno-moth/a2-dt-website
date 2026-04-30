@@ -1,3 +1,7 @@
+<?php 
+    include("header.html");
+    include 'navbar.php';
+?>
 
 <!DOCTYPE html>
 <html>
@@ -9,10 +13,7 @@
 
 <body>
 
-<?php
-include 'db.php';
-include 'navbar.php';
-?>
+
 
 <h1 class="page-title">Place an Order</h1>
 

@@ -1,37 +1,9 @@
-<?php
-session_start();
-include __DIR__ . '/db.php';
 
-if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
-    $email = $_POST['email'];
-    $password = $_POST['password'];
 
-    $sql = "SELECT user_id, username, password FROM users WHERE email = ?";
-    $stmt = $conn->prepare($sql);
-
-    if (!$stmt) {
-        die("SQL Error: " . $conn->error);
-    }
-
-    $stmt->bind_param("s", $email);
-    $stmt->execute();
-
-    $result = $stmt->get_result();
-    $user = $result->fetch_assoc();
-
-    if ($user && password_verify($password, $user['password'])) {
-
-        $_SESSION['user_id'] = $user['user_id'];
-        $_SESSION['username'] = $user['username'];
-
-        header("Location: index.php");
-        exit();
-
-    } else {
-        $error = "Invalid email or password.";
-    }
-}
+<?php 
+    include("header.html");
+    include 'navbar.php';
 ?>
 
 <!DOCTYPE html>
@@ -39,37 +11,57 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 <head>
     <link rel="stylesheet" href="style.css">
     <script src="script.js" defer></script>
-    <title>Login</title>
-</head>
 
+</head>
 <body>
 
-<?php include 'navbar.php'; ?>
-
-<h2>Login</h2>
-
-<?php
-if (isset($error)) {
-    echo "<p style='color:red;'>$error</p>";
-}
-?>
-
-<form method="POST">
-
-    <input name="email" type="email" placeholder="Email" required>
-
-    <input id="password" name="password" type="password" placeholder="Password" required>
-    <button type="button" onclick="togglePassword()">Show</button>
-
-    <button type="submit">Login</button>
-</form>
-
-<script>
-function togglePassword() {
-    let pw = document.getElementById("password");
-    pw.type = (pw.type === "password") ? "text" : "password";
-}
-</script>
-
+		<div class="container" id="loginContainer">
+			<header id="headerScriptLocal"></header>
+			
+			<section class="mainLoginArea">
+				<div class="centerAlign">
+					<form action = "login.php" method = "post">
+						<h1>Login</h1>
+						<p class="FNp">
+                            <label> Email: </label>
+							<input type="email" name="sEmail" id="sEmailID">
+						</p>
+						
+						<p>
+							<label> Password:</label>
+							<input type="password" name="sPassword" id="sPasswordID">
+						</p>
+						
+						<input type = "submit" name = "sSubmitButton" id = "sSubmitBUttonID" value = "Login">
+					</form>
+				</div>
+			</section>
+            
+        </div>
 </body>
-</html>
+</html> 
+
+        <?php 
+            if (isset($_POST["sSubmitButton"])){
+                $username = filter_input(INPUT_POST, "sEmail", FILTER_SANITIZE_EMAIL);
+                $password = filter_input(INPUT_POST, "sPassword", FILTER_SANITIZE_SPECIAL_CHARS);
+                echo "button pressed";
+                if (empty($username)) {
+                     echo "<script type='text/javascript'>alert('Username Blank');</script>";
+                }
+                elseif(empty($password)){
+                     echo "<script type='text/javascript'>alert('Password Blank');</script>";
+                }
+                else {
+                    # code...
+                    echo "Logging in"."<br>";
+                    echo $password."<br>";
+                    echo $username. "<br>";
+
+                
+                }
+            }
+        ?>
+
+
+

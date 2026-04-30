@@ -1,5 +1,21 @@
 <?php
 
+    $sDbServer = "";
+    $sDbDatabase = "";
+    $sDbUser = "";
+    $sDbPassword = "";
+
+    $oDbConn = "";
+
+    $oDbConn = mysqli_connect($sDbServer, $sDbUser, $sDbPassword, $sDbDatabase);
+
+
+
+
+
+
+
+
 $conn = new mysqli("localhost", "root", "root", "commissions");
 
 if ($conn->connect_error) {

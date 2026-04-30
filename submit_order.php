@@ -1,3 +1,8 @@
+<?php 
+    include("header.html");
+    include 'navbar.php';
+?>
+
 <?php
 include 'db.php';
 

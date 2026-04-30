@@ -1,6 +1,11 @@
+<?php 
+    include("header.html");
+    include 'navbar.php';
+?>
+
 <?php
 include 'db.php';
-include 'navbar.php';
+
 
 $result = $conn->query("SELECT * FROM orders ORDER BY created_at DESC");
 ?>
