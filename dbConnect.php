@@ -1,4 +1,4 @@
-
+<?php
 $sDbServer = "localhost";
 $sDbUser = "root";
 $sDbPassword = "";
@@ -8,14 +8,12 @@ try {
     $oDbConn = mysqli_connect($sDbServer, $sDbUser, $sDbPassword, $sDbDatabase);
     $conn = $oDbConn;
 } 
-catch (\mysqli_sql_exception $e) {
-    die(json_encode(["error" => "Connection failed: Error Code = " . $e->getMessage()]));
+catch (\mysqli_sql_exception) {
+   echo "Could not connect";
 }
 
-if ($conn === false) {
-    die(json_encode(["error" => "Connection failed: Error Code = " . mysqli_connect_error()]));
-} 
-else {
-    echo json_encode(["success" => "Connection successful!"]);
-    die(json_encode(["success" => "Connection successful!"]));
-}
+if ($conn) {
+    echo "You are connected to the database!";
+    
+    }
+?>
